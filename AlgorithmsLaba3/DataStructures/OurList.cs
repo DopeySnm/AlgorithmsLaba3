@@ -21,7 +21,7 @@ namespace AlgorithmsLaba3.DataStructures
         {
             Clear();
         }
-        public void Add(T data)
+        public void AddLast(T data)
         {
             if (Head == null)
             {
@@ -31,6 +31,18 @@ namespace AlgorithmsLaba3.DataStructures
             var item = new Node<T>(data);
             Tail.Next = item;
             Tail = item;
+            Count++;
+        }
+        public void AddFirst(T data)
+        {
+            if (Head == null)
+            {
+                SetHeadAndTail(data);
+                return;
+            }
+            var item = new Node<T>(data);
+            item.Next = Head;
+            Head = item;
             Count++;
         }
         public void Delete(T data)
@@ -60,6 +72,17 @@ namespace AlgorithmsLaba3.DataStructures
             {
                 SetHeadAndTail(data);
             }
+        }
+        public T[] GetArrayData()
+        {
+            T[] result = new T[Count];
+            var current = Head;
+            for (int i = 0; i < result.Length; i++)
+            {
+                result[i] = current.GetData();
+                current = current.Next;
+            }
+            return result;
         }
         public void Clear()
         {

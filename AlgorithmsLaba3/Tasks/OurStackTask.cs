@@ -8,5 +8,6 @@ namespace AlgorithmsLaba3.Tasks
 {
     internal class OurStackTask
     {
+
     }
 }
