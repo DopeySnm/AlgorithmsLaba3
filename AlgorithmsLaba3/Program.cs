@@ -1,4 +1,6 @@
 ﻿using AlgorithmsLaba3.DataStructures;
+using AlgorithmsLaba3.Tasks;
+using System.Diagnostics.Metrics;
 
 namespace AlgorithmsLaba3
 {
@@ -6,18 +8,8 @@ namespace AlgorithmsLaba3
     {
         static void Main(string[] args)
         {
-            OurList<int> ints = new OurList<int>();
-            ints.AddLast(1);
-            ints.AddLast(2);
-            ints.AddLast(3);
-            ints.AddLast(4);
-            ints.AddFirst(0);
-            var a = ints.GetArrayData();
-            for (int i = 0; i < a.Length; i++)
-            {
-                Console.WriteLine(a[i]);
-            }
-            Console.WriteLine();
+            Part4 part4 = new Part4();
+            part4.Go();
         }
     }
 }
