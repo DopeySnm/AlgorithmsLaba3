@@ -1,5 +1,6 @@
 ﻿using AlgorithmsLaba3.Models;
 using System.Collections;
+using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Xml;
 
@@ -10,7 +11,7 @@ namespace AlgorithmsLaba3.DataStructures
         public Node<T> Head { get; private set; }
         public Node<T> Tail { get; private set; }
         public int Count { get; private set; }
-
+        
 
 
         public OurList(T[] data)
@@ -58,7 +59,7 @@ namespace AlgorithmsLaba3.DataStructures
         }
         public void AddAfter(T after, T data)
         {
-            CheckingForAnEmptyList();
+            ExceptionIsEmpty();
             var item = new Node<T>(data);
             var current = Head;
             while (current != null)
@@ -81,7 +82,7 @@ namespace AlgorithmsLaba3.DataStructures
         }
         public void AddAfter(T after, OurList<T> data)
         {
-            CheckingForAnEmptyList();
+            ExceptionIsEmpty();
             var current = Head;
             if (data.Equals(this))
             {
@@ -120,7 +121,7 @@ namespace AlgorithmsLaba3.DataStructures
         public void AddBefore(T before, T data)
         {
             var item = new Node<T>(data);
-            CheckingForAnEmptyList();
+            ExceptionIsEmpty();
             if (Head.GetData().Equals(before))
             {
                 item.Next = Head;
@@ -148,9 +149,20 @@ namespace AlgorithmsLaba3.DataStructures
             AddLast(data);
             Sort();
         }
+        public void AddArray(T[] data)
+        {
+            for (int i = 0; i < data.Length; i++)
+            {
+                AddLast(data[i]);
+            }
+        }
+        public void RemoveFirst()
+        {
+            Head = Head.Next;
+        }
         public void Remove(T data)
         {
-            CheckingForAnEmptyList();
+            ExceptionIsEmpty();
             if (Head.GetData().Equals(data))
             {
                 Head = Head.Next;
@@ -173,7 +185,7 @@ namespace AlgorithmsLaba3.DataStructures
         }
         public void RemoveAllIdentical(T data)
         {
-            CheckingForAnEmptyList();
+            ExceptionIsEmpty();
             var prev = Head;
             var current = Head.Next;
             while (Head.GetData().Equals(data))
@@ -198,7 +210,7 @@ namespace AlgorithmsLaba3.DataStructures
         }
         public void RemoveTheSecondFound(T data)
         {
-            CheckingForAnEmptyList();
+            ExceptionIsEmpty();
             int CountOfIdentical = 0;
             if (Head.GetData().Equals(data))
             {
@@ -232,7 +244,7 @@ namespace AlgorithmsLaba3.DataStructures
         }
         public void Reverse()
         {
-            CheckingForAnEmptyList();
+            ExceptionIsEmpty();
             if (Count == 0 && Count == 1)
             {
                 return;
@@ -258,7 +270,7 @@ namespace AlgorithmsLaba3.DataStructures
         }
         public void FirstToTail()
         {
-            CheckingForAnEmptyList();
+            ExceptionIsEmpty();
             var current = Head;
             Tail.Next = Head;
             Head = Head.Next;
@@ -266,7 +278,7 @@ namespace AlgorithmsLaba3.DataStructures
         }
         public void LastToHead()
         {
-            CheckingForAnEmptyList();
+            ExceptionIsEmpty();
             var curren = Head;
             var next = curren.Next;
             while (next.Next != null)
@@ -281,7 +293,7 @@ namespace AlgorithmsLaba3.DataStructures
         }
         public void Sort()
         {
-            CheckingForAnEmptyList();
+            ExceptionIsEmpty();
             var arr = GetArrayData();
             Array.Sort(arr);
             Clear();
@@ -335,6 +347,30 @@ namespace AlgorithmsLaba3.DataStructures
 
 
 
+        public bool IsEmpty()
+        {
+            return Head != null;
+        }
+        public T FindFirst()
+        {
+            var data = Head.GetData();
+            Head = Head.Next;
+            return data;
+        }
+        public T Find(T data)
+        {
+            ExceptionIsEmpty();
+            var current = Head;
+            while (current != null)
+            {
+                if (current.GetData().Equals(data))
+                {
+                    return data;
+                }
+                current = current.Next;
+            }
+            throw new Exception("Элемент не найден");
+        }
         public OurList<T> GiveAPiece(T data)
         {
             OurList<T> result = new OurList<T>();
@@ -367,7 +403,7 @@ namespace AlgorithmsLaba3.DataStructures
         }
         public OurList<T> GetUniqueItems()
         {
-            CheckingForAnEmptyList();
+            ExceptionIsEmpty();
             OurList<T> result = new OurList<T>();
             result.AddLast(Head.GetData());
             var current = Head.Next;
@@ -383,12 +419,12 @@ namespace AlgorithmsLaba3.DataStructures
         }
         public int GetCuontUniqueItems()
         {
-            CheckingForAnEmptyList();
+            ExceptionIsEmpty();
             return GetUniqueItems().Count;
         }
         public bool Contains(T data)
         {
-            CheckingForAnEmptyList();
+            ExceptionIsEmpty();
             if (Head != null)
             {
                 var current = Head;
@@ -405,7 +441,7 @@ namespace AlgorithmsLaba3.DataStructures
         }
         public T[] GetArrayData()
         {
-            CheckingForAnEmptyList();
+            ExceptionIsEmpty();
             T[] result = new T[Count];
             var current = Head;
             for (int i = 0; i < result.Length; i++)
@@ -418,18 +454,11 @@ namespace AlgorithmsLaba3.DataStructures
 
 
 
-        private void CheckingForAnEmptyList()
+        private void ExceptionIsEmpty()
         {
             if (Head == null)
             {
                 throw new Exception("Связный список пустой");
-            }
-        }
-        private void AddArray(T[] data)
-        {
-            for (int i = 0; i < data.Length; i++)
-            {
-                AddLast(data[i]);
             }
         }
         private void SetHeadAndTail(T data)
