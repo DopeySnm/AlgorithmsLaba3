@@ -7,43 +7,39 @@ using System.Threading.Tasks;
 
 namespace AlgorithmsLaba3.Tasks
 {
-    internal class Part4
+    internal class Task4
     {
         private OurList<int> first;
         private OurList<int> second;
         private OurList<int> random;
-        public Part4()
-        {
-            GetData();
-        }
         public void Go()
         {
-            Task1();
+            Part1();
             Console.WriteLine();
-            Task2();
+            Part2();
             Console.WriteLine();
-            Task3();
+            Part3();
             Console.WriteLine();
-            Task4();
+            Part4();
             Console.WriteLine();
-            Task5();
+            Part5();
             Console.WriteLine();
-            Task6();
+            Part6();
             Console.WriteLine();
-            Task7();
+            Part7();
             Console.WriteLine();
-            Task8();
+            Part8();
             Console.WriteLine();
-            Task9();
+            Part9();
             Console.WriteLine();
-            Task10();
+            Part10();
             Console.WriteLine();
-            Task11();
+            Part11();
             Console.WriteLine();
-            Task12();
+            Part12();
             Console.WriteLine();
         }
-        private void Task12()
+        private void Part12()
         {
             GetData();
             Console.WriteLine("Задание 12");
@@ -62,7 +58,7 @@ namespace AlgorithmsLaba3.Tasks
                 Console.Write(result[i] + " ");
             }
         }
-        private void Task11()
+        private void Part11()
         {
             GetData();
             Console.WriteLine("Задание 11");
@@ -81,7 +77,7 @@ namespace AlgorithmsLaba3.Tasks
                 Console.Write(result[i] + " ");
             }
         }
-        private void Task10()
+        private void Part10()
         {
             GetData();
             Console.WriteLine("Задание 10");
@@ -108,7 +104,7 @@ namespace AlgorithmsLaba3.Tasks
                 Console.Write(result2[i] + " ");
             }
         }
-        private void Task9()
+        private void Part9()
         {
             GetData();
             Console.WriteLine("Задание 9");
@@ -134,7 +130,7 @@ namespace AlgorithmsLaba3.Tasks
                 Console.Write(result[i] + " ");
             }
         }
-        private void Task8()
+        private void Part8()
         {
             GetData();
             Console.WriteLine("Задание 8");
@@ -153,7 +149,7 @@ namespace AlgorithmsLaba3.Tasks
                 Console.Write(result[i] + " ");
             }
         }
-        private void Task7()
+        private void Part7()
         {
             GetData();
             Console.WriteLine("Задание 7");
@@ -172,7 +168,7 @@ namespace AlgorithmsLaba3.Tasks
                 Console.Write(result[i] + " ");
             }
         }
-        private void Task6()
+        private void Part6()
         {
             GetData();
             Console.WriteLine("Задание 6");
@@ -191,7 +187,7 @@ namespace AlgorithmsLaba3.Tasks
                 Console.Write(result[i] + " ");
             }
         }
-        private void Task5()
+        private void Part5()
         {
             GetData();
             Console.WriteLine("Задание 5");
@@ -210,7 +206,7 @@ namespace AlgorithmsLaba3.Tasks
                 Console.Write(result[i] + " ");
             }
         }
-        private void Task4()
+        private void Part4()
         {
             GetData();
             Console.WriteLine("Задание 4");
@@ -229,7 +225,7 @@ namespace AlgorithmsLaba3.Tasks
                 Console.Write(result[i] + " ");
             }
         }
-        private void Task3()
+        private void Part3()
         {
             GetData();
             Console.WriteLine("Задание 3");
@@ -243,7 +239,7 @@ namespace AlgorithmsLaba3.Tasks
             }
             Console.WriteLine($"\nОтвет {result}");
         }
-        private void Task2()
+        private void Part2()
         {
             GetData();
             Console.WriteLine("Задание 2");
@@ -269,7 +265,7 @@ namespace AlgorithmsLaba3.Tasks
             }
             Console.WriteLine();
         }
-        private void Task1()
+        private void Part1()
         {
             GetData();
             Console.WriteLine("Задание 1");
