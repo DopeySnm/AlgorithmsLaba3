@@ -41,5 +41,30 @@ namespace AlgorithmsLaba3.Tasks
             Console.WriteLine($"Вы взяли билет, ваш номер {ticket1.GetId()}");
             registry.Consultation();
         }
+        public void TreePart()
+        {
+            List<int> items = new List<int>();
+            items.Add(123);
+            items.Add(43);
+            items.Add(9);
+            items.Add(7);
+            items.Add(34);
+            items.Add(4);
+            items.Add(8);
+            Console.WriteLine("Входные данные");
+            foreach (var item in items)
+            {
+                Console.WriteLine(item);
+            }
+            Console.WriteLine();
+            Console.WriteLine("Отсортированые данные");
+            HeapSort<int> heapSort = new HeapSort<int>(items);
+            heapSort.Sort();
+            var test = heapSort.Items;
+            foreach (var item in test)
+            {
+                Console.WriteLine(item);
+            }
+        }
     }
 }

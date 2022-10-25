@@ -22,7 +22,7 @@ namespace AlgorithmsLaba3
             ////tree.Add(10);
             ////Console.WriteLine();
             Task3 task3 = new Task3();
-            task3.QueuePart();
+            task3.TreePart();
         }
     }
 }
