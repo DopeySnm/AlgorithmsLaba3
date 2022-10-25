@@ -13,10 +13,6 @@ namespace AlgorithmsLaba3.Tasks
 {
     internal class Task3
     {
-        public Task3()
-        {
-
-        }
         public void ListPart()
         {
             DailySchedule dailySchedule = new DailySchedule();

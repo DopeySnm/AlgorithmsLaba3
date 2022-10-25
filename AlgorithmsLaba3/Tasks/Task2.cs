@@ -9,7 +9,7 @@ namespace AlgorithmsLaba3.Tasks
 {
     internal class Task2
     {
-        static void Part1()
+        static void ReadFileOperation()
         {
             string CURRENTPATH = Environment.CurrentDirectory;
             CURRENTPATH += "\\Test.txt";
