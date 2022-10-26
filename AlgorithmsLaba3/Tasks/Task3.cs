@@ -62,5 +62,28 @@ namespace AlgorithmsLaba3.Tasks
                 Console.WriteLine(item);
             }
         }
+        public void StackPart()
+        {
+            StackOfApproaches stack = new StackOfApproaches();
+            Console.WriteLine("Добавил упражнение");
+            for (int i = 0; i < 10; i++)
+            {
+                stack.AddExercise("ожуманя", i + 1, 20 - (i + 2));
+            }
+            stack.PrintStackExercise();
+            Console.WriteLine();
+            stack.AddExercise("подтягивания", 5, 15);
+            Console.WriteLine();
+            Console.WriteLine("Добавил новое упражнение");
+            stack.PrintStackExercise();
+            stack.Complite();
+            Console.WriteLine();
+            Console.WriteLine("Выполнил упражнение");
+            stack.PrintStackExercise();
+            stack.AddExercise("подтягивания", 6, 10);
+            Console.WriteLine();
+            Console.WriteLine("Добавил новое упражнение упражнение");
+            stack.PrintStackExercise();
+        }
     }
 }

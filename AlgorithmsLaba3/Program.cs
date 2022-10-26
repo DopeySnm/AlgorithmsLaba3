@@ -1,4 +1,5 @@
 ﻿using AlgorithmsLaba3.DataStructures;
+using AlgorithmsLaba3.Models;
 using AlgorithmsLaba3.Tasks;
 using System.Diagnostics.Metrics;
 
@@ -22,7 +23,7 @@ namespace AlgorithmsLaba3
             ////tree.Add(10);
             ////Console.WriteLine();
             Task3 task3 = new Task3();
-            task3.TreePart();
+            task3.StackPart();
         }
     }
 }

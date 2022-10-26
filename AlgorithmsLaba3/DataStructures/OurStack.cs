@@ -49,8 +49,15 @@ namespace AlgorithmsLaba3.DataStructures
                 Console.WriteLine(elem);
             }
         }
-
-
+        public void Clear()
+        {
+            Head = null;
+            Length = 0;
+        }
+        public int GetCount()
+        {
+            return Length;
+        }
         IEnumerator<T> IEnumerable<T>.GetEnumerator()
         {
             Node<T> current = Head;
