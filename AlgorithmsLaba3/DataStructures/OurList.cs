@@ -245,7 +245,7 @@ namespace AlgorithmsLaba3.DataStructures
         public void Reverse()
         {
             ExceptionIsEmpty();
-            if (Count == 0 && Count == 1)
+            if (Count == 0 || Count == 1)
             {
                 return;
             }
