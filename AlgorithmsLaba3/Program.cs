@@ -1,12 +1,6 @@
-﻿using AlgorithmsLaba3.DataStructures;
-using AlgorithmsLaba3.Models;
-using AlgorithmsLaba3.Service;
+﻿using AlgorithmsLaba3.Service;
 using AlgorithmsLaba3.Tasks.Task2;
 using AlgorithmsLaba3.Tasks.Task1;
-using AlgorithmsLaba3.Test;
-using System.Diagnostics.Metrics;
-using System.Net.Http.Headers;
-using System.Text;
 
 namespace AlgorithmsLaba3
 {

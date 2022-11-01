@@ -71,6 +71,7 @@ namespace AlgorithmsLaba3.Tasks.Task1
             ourStack = new OperationFormationOurStack();
             string fileName = "";
             double[] result = null;
+            int[] resultData;
             string[] options = { "TestTime", "TestMemory", "Back"};
             string contents = "Меню";
             do
@@ -86,8 +87,8 @@ namespace AlgorithmsLaba3.Tasks.Task1
                         fileName = $"OurStackTestTimeWith{GetNameFile()}";
                         fileHelp.WriteRanodmFileOperation(count, fileName);
                         data = fileHelp.ReadFile(fileName);
-                        result = RunTestTimeOurStack(new TestTime(), count, countPoint);
-                        WriteResult.WriteFileResult(fileName, result);
+                        (resultData, result) = RunTestTimeOurStack(new TestTime(), count, countPoint);
+                        WriteResult.WriteFileResult(fileName, result, resultData);
                         break;
                     case 1:
                         Console.Clear();
@@ -95,19 +96,21 @@ namespace AlgorithmsLaba3.Tasks.Task1
                         fileName = $"OurStackTestMemoryWith{GetNameFile()}";
                         fileHelp.WriteRanodmFileOperation(count, fileName);
                         data = fileHelp.ReadFile(fileName);
-                        result = RunTestTimeOurStack(new TestMemory(), count, countPoint);
-                        WriteResult.WriteFileResult(fileName, result);
+                        (resultData, result) = RunTestTimeOurStack(new TestMemory(), count, countPoint);
+                        WriteResult.WriteFileResult(fileName, result, resultData);
                         break;
                     case 2:
                         return;
                 }
             } while (true);
         }
-        private double[] RunTestTimeOurStack(IBaseTest test, int count, int countPoint)
+        private (int[], double[]) RunTestTimeOurStack(IBaseTest test, int count, int countPoint)
         {
             double[] resultTest = new double[countPoint];
+            int[] dataResult = new int[countPoint];
             for (int i = 0; i < countPoint; i++)
             {
+                dataResult[i] = (i + 1) * (count / countPoint);
                 ourStack.SetData(GivePartOfTheArray((count / countPoint) * (i + 1), data));
                 if (push == false)
                 {
@@ -115,13 +118,14 @@ namespace AlgorithmsLaba3.Tasks.Task1
                 }
                 resultTest[i] = test.Run(ourStack);
             }
-            return resultTest;
+            return (dataResult, resultTest);
         }
         private void TestBaseStack()
         {
             baseStack = new OperationFormationBaseStack();
             string fileName = "";
             double[] result = null;
+            int[] resultData;
             string[] options = { "TestTime", "TestMemory", "Back" };
             string contents = "Меню";
             do
@@ -137,8 +141,8 @@ namespace AlgorithmsLaba3.Tasks.Task1
                         fileName = $"BaseStackTestTimeWith{GetNameFile()}";
                         fileHelp.WriteRanodmFileOperation(count, fileName);
                         data = fileHelp.ReadFile(fileName);
-                        result = RunTestBaseStack(new TestTime(), count, countPoint);
-                        WriteResult.WriteFileResult(fileName, result);
+                        (resultData, result) = RunTestBaseStack(new TestTime(), count, countPoint);
+                        WriteResult.WriteFileResult(fileName, result, resultData);
                         break;
                     case 1:
                         Console.Clear();
@@ -146,19 +150,21 @@ namespace AlgorithmsLaba3.Tasks.Task1
                         fileName = $"BaseStackTestMemoryWith{GetNameFile()}";
                         fileHelp.WriteRanodmFileOperation(count, fileName);
                         data = fileHelp.ReadFile(fileName);
-                        result = RunTestBaseStack(new TestMemory(), count, countPoint);
-                        WriteResult.WriteFileResult(fileName, result);
+                        (resultData, result) = RunTestBaseStack(new TestMemory(), count, countPoint);
+                        WriteResult.WriteFileResult(fileName, result, resultData);
                         break;
                     case 2:
                         return;
                 }
             } while (true);
         }
-        private double[] RunTestBaseStack(IBaseTest test, int count, int countPoint)
+        private (int[], double[]) RunTestBaseStack(IBaseTest test, int count, int countPoint)
         {
             double[] resultTest = new double[countPoint];
+            int[] dataResult = new int[countPoint];
             for (int i = 0; i < countPoint; i++)
             {
+                dataResult[i] = (i + 1) * (count / countPoint);
                 baseStack.SetData(GivePartOfTheArray((count / countPoint) * (i + 1), data));
                 if (push == false)
                 {
@@ -166,7 +172,7 @@ namespace AlgorithmsLaba3.Tasks.Task1
                 }
                 resultTest[i] = test.Run(baseStack);
             }
-            return resultTest;
+            return (dataResult, resultTest);
         }
         private void SetPar(string par)
         {
