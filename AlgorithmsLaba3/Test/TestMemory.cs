@@ -1,31 +1,33 @@
 ﻿using AlgorithmsLaba3.Service;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AlgorithmsLaba3.Tasks.Task1;
+using System.Management;
 
 namespace AlgorithmsLaba3.Test
 {
-    internal class TestMemory : IBaseTest
+    internal class TestMemory : IBaseTest<long>
     {
-        public double Run(ITest testTime)
+        public static long LastResult = 0;
+        public long Run(ITest testTime)
         {
-            Process currentProcess = Process.GetCurrentProcess();
-            double[] srTime = new double[5];
-            for (int j = 0; j < 5; j++)
+            long[] srTime = new long[5];
+            for (int i = 0; i < srTime.Length; i++)
             {
-                long usedMemoryBefore = GC.GetTotalMemory(true);
+                var startMemory = GC.GetTotalMemory(false) / 1024;
                 testTime.Test();
-                long usedMemoryAfter = GC.GetTotalMemory(true);
-                srTime[j] = usedMemoryBefore - usedMemoryAfter;
+                var endMemory = GC.GetTotalMemory(false) / 1024;
+                var result = endMemory - startMemory;
+                if (result < 0)
+                {
+                    result = LastResult;
+                }
+                else
+                {
+                    LastResult = result;
+                }
+                srTime[i] = result;
             }
             return AnamylCorrection(srTime);
         }
-
-        private double AnamylCorrection(double[] time)
+        private long AnamylCorrection(long[] time)
         {
             Array.Sort(time);
             return time[2];

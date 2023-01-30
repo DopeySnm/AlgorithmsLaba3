@@ -9,5 +9,7 @@ namespace AlgorithmsLaba3.Service
     internal interface ITest
     {
         public void Test();
+        public void SetData(string[] data);
+        public void SetInitialData(string[] data);
     }
 }

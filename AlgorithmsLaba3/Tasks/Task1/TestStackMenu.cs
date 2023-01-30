@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace AlgorithmsLaba3.Tasks.Task1
 {
-    internal class TestStackOp
+    internal class TestStackMenu
     {
         private int count;
         private int countPoint;
@@ -21,9 +21,7 @@ namespace AlgorithmsLaba3.Tasks.Task1
         private bool isEmpty;
         private bool print;
         private FileHelp fileHelp;
-        private OperationFormationOurStack ourStack;
-        private OperationFormationBaseStack baseStack;
-        public TestStackOp()
+        public TestStackMenu()
         {
             push = false;
             pop = false;
@@ -31,20 +29,7 @@ namespace AlgorithmsLaba3.Tasks.Task1
             isEmpty = false;
             print = false;
         }
-        private void InputDataConsole()
-        {
-            Console.WriteLine("Ведите количесво тестируемых данных");
-            count = int.Parse(Console.ReadLine());
-            Console.WriteLine("Ведите количество точек");
-            countPoint = int.Parse(Console.ReadLine());
-            Console.WriteLine("Ведите параметры которые хотите протестить через пробел, можно выбирать несклько параметров");
-            Console.WriteLine("1 - push, 2 - pop, 3 - top, 4 - isEmpty, 5 - print");
-            parametr = Console.ReadLine();
-            fileHelp = new FileHelp();
-            SetPar(parametr);
-            fileHelp.SetParemetrs(push, pop, top, isEmpty, print);
-        }
-        public void TestMenu()
+        public void MainMenu()
         {
             string[] options = { "BaseStack", "OurStack", "Back" };
             string contents = "Меню";
@@ -66,65 +51,12 @@ namespace AlgorithmsLaba3.Tasks.Task1
                 }
             } while (true);
         }
-        private void TestOurStack()
-        {
-            ourStack = new OperationFormationOurStack();
-            string fileName = "";
-            double[] result = null;
-            int[] resultData;
-            string[] options = { "TestTime", "TestMemory", "Back"};
-            string contents = "Меню";
-            do
-            {
-                Console.Clear();
-                MenuRendering menu = new MenuRendering(options, contents);
-                int selectedIndex = menu.Run();
-                switch (selectedIndex)
-                {
-                    case 0:
-                        Console.Clear();
-                        InputDataConsole();
-                        fileName = $"OurStackTestTimeWith{GetNameFile()}";
-                        fileHelp.WriteRanodmFileOperation(count, fileName);
-                        data = fileHelp.ReadFile(fileName);
-                        (resultData, result) = RunTestTimeOurStack(new TestTime(), count, countPoint);
-                        WriteResult.WriteFileResult(fileName, result, resultData);
-                        break;
-                    case 1:
-                        Console.Clear();
-                        InputDataConsole();
-                        fileName = $"OurStackTestMemoryWith{GetNameFile()}";
-                        fileHelp.WriteRanodmFileOperation(count, fileName);
-                        data = fileHelp.ReadFile(fileName);
-                        (resultData, result) = RunTestTimeOurStack(new TestMemory(), count, countPoint);
-                        WriteResult.WriteFileResult(fileName, result, resultData);
-                        break;
-                    case 2:
-                        return;
-                }
-            } while (true);
-        }
-        private (int[], double[]) RunTestTimeOurStack(IBaseTest test, int count, int countPoint)
-        {
-            double[] resultTest = new double[countPoint];
-            int[] dataResult = new int[countPoint];
-            for (int i = 0; i < countPoint; i++)
-            {
-                dataResult[i] = (i + 1) * (count / countPoint);
-                ourStack.SetData(GivePartOfTheArray((count / countPoint) * (i + 1), data));
-                if (push == false)
-                {
-                    ourStack.SetStack(FillOurStack((count / countPoint) * (i + 1) * 5));
-                }
-                resultTest[i] = test.Run(ourStack);
-            }
-            return (dataResult, resultTest);
-        }
         private void TestBaseStack()
         {
-            baseStack = new OperationFormationBaseStack();
+            OperationFormationBaseStack baseStack = new OperationFormationBaseStack();
             string fileName = "";
-            double[] result = null;
+            double[] resultTime = null;
+            long[] resultMemory = null;
             int[] resultData;
             string[] options = { "TestTime", "TestMemory", "Back" };
             string contents = "Меню";
@@ -141,8 +73,9 @@ namespace AlgorithmsLaba3.Tasks.Task1
                         fileName = $"BaseStackTestTimeWith{GetNameFile()}";
                         fileHelp.WriteRanodmFileOperation(count, fileName);
                         data = fileHelp.ReadFile(fileName);
-                        (resultData, result) = RunTestBaseStack(new TestTime(), count, countPoint);
-                        WriteResult.WriteFileResult(fileName, result, resultData);
+                        TestAlgorithm<double> testTime = new TestAlgorithm<double>(data);
+                        (resultData, resultTime) = testTime.Test(baseStack, new TestTime(), count, countPoint);
+                        WriteResult<double>.WriteFileResult(fileName, resultTime, resultData);
                         break;
                     case 1:
                         Console.Clear();
@@ -150,29 +83,55 @@ namespace AlgorithmsLaba3.Tasks.Task1
                         fileName = $"BaseStackTestMemoryWith{GetNameFile()}";
                         fileHelp.WriteRanodmFileOperation(count, fileName);
                         data = fileHelp.ReadFile(fileName);
-                        (resultData, result) = RunTestBaseStack(new TestMemory(), count, countPoint);
-                        WriteResult.WriteFileResult(fileName, result, resultData);
+                        TestAlgorithm<long> testMemory = new TestAlgorithm<long>(data);
+                        (resultData, resultMemory) = testMemory.Test(baseStack, new TestMemory(), count, countPoint);
+                        WriteResult<long>.WriteFileResult(fileName, resultMemory, resultData);
                         break;
                     case 2:
                         return;
                 }
             } while (true);
         }
-        private (int[], double[]) RunTestBaseStack(IBaseTest test, int count, int countPoint)
+        private void TestOurStack()
         {
-            double[] resultTest = new double[countPoint];
-            int[] dataResult = new int[countPoint];
-            for (int i = 0; i < countPoint; i++)
+            OperationFormationOurStack ourStack = new OperationFormationOurStack();
+            string fileName = "";
+            double[] resultTime = null;
+            long[] resultMemory = null;
+            int[] resultData;
+            string[] options = { "TestTime", "TestMemory", "Back" };
+            string contents = "Меню";
+            do
             {
-                dataResult[i] = (i + 1) * (count / countPoint);
-                baseStack.SetData(GivePartOfTheArray((count / countPoint) * (i + 1), data));
-                if (push == false)
+                Console.Clear();
+                MenuRendering menu = new MenuRendering(options, contents);
+                int selectedIndex = menu.Run();
+                switch (selectedIndex)
                 {
-                    baseStack.SetStack(FillBaseStack((count / countPoint) * (i + 1) * 5));
+                    case 0:
+                        Console.Clear();
+                        InputDataConsole();
+                        fileName = $"OurStackTestTimeWith{GetNameFile()}";
+                        fileHelp.WriteRanodmFileOperation(count, fileName);
+                        data = fileHelp.ReadFile(fileName);
+                        TestAlgorithm<double> testTime = new TestAlgorithm<double>(data);
+                        (resultData, resultTime) = testTime.Test(ourStack, new TestTime(), count, countPoint);
+                        WriteResult<double>.WriteFileResult(fileName, resultTime, resultData);
+                        break;
+                    case 1:
+                        Console.Clear();
+                        InputDataConsole();
+                        fileName = $"OurStackTestMemoryWith{GetNameFile()}";
+                        fileHelp.WriteRanodmFileOperation(count, fileName);
+                        data = fileHelp.ReadFile(fileName);
+                        TestAlgorithm<long> testMemory = new TestAlgorithm<long>(data);
+                        (resultData, resultMemory) = testMemory.Test(ourStack, new TestMemory(), count, countPoint);
+                        WriteResult<long>.WriteFileResult(fileName, resultMemory, resultData);
+                        break;
+                    case 2:
+                        return;
                 }
-                resultTest[i] = test.Run(baseStack);
-            }
-            return (dataResult, resultTest);
+            } while (true);
         }
         private void SetPar(string par)
         {
@@ -224,32 +183,18 @@ namespace AlgorithmsLaba3.Tasks.Task1
             }
             return result.ToString();
         }
-        private Stack<string> FillBaseStack(int count)
+        private void InputDataConsole()
         {
-            Stack<string> stack = new Stack<string>();
-            for (int i = 0; i < count; i++)
-            {
-                stack.Push("data");
-            }
-            return stack;
-        }
-        private OurStack<string> FillOurStack(int count)
-        {
-            OurStack<string> stack = new OurStack<string>();
-            for (int i = 0; i < count; i++)
-            {
-                stack.Push("data");
-            }
-            return stack;
-        }
-        private string[] GivePartOfTheArray(int size, string[] data)
-        {
-            string[] testData = new string[size];
-            for (int j = 0; j < testData.Length; j++)
-            {
-                testData[j] = data[j];
-            }
-            return testData;
+            Console.WriteLine("Ведите количесво тестируемых данных");
+            count = int.Parse(Console.ReadLine());
+            Console.WriteLine("Ведите количество точек");
+            countPoint = int.Parse(Console.ReadLine());
+            Console.WriteLine("Ведите параметры которые хотите протестить через пробел, можно выбирать несклько параметров");
+            Console.WriteLine("1 - push, 2 - pop, 3 - top, 4 - isEmpty, 5 - print");
+            parametr = Console.ReadLine();
+            fileHelp = new FileHelp();
+            SetPar(parametr);
+            fileHelp.SetParemetrs(push, pop, top, isEmpty, print);
         }
     }
 }

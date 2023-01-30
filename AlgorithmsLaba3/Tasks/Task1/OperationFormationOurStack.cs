@@ -17,9 +17,13 @@ namespace AlgorithmsLaba3.Tasks.Task1
         {
             this.data = data;
         }
-        public void SetStack(OurStack<string> stack)
+        public void SetInitialData(string[] data)
         {
-            this.stack = stack;
+            stack = new OurStack<string>();
+            for (int i = 0; i < data.Length; i++)
+            {
+                stack.Push(data[i]);
+            }
         }
         public void Formation()
         {
@@ -34,38 +38,45 @@ namespace AlgorithmsLaba3.Tasks.Task1
                     string text = item.Remove(0, 2);
                     stack.Push(text);
                 }
+                //if (stack.Length == 0)
+                //{
+                //    stack.Push("data");
+                //}
                 else if (item[0] == '2')
                 {
-                    try
-                    {
-                        stack.Pop();
-                    }
-                    catch
-                    {
-                        //Console.WriteLine($"Ошибка: элемента нет");
-                    }
+                    stack.Pop();
+                    //try
+                    //{
+                    //    stack.Pop();
+                    //}
+                    //catch
+                    //{
+                    //    //Console.WriteLine($"Ошибка: элемента нет");
+                    //}
                 }
                 else if (item[0] == '3')
                 {
-                    try
-                    {
-                        stack.Top();
-                    }
-                    catch
-                    {
-                        //Console.WriteLine($"Ошибка: элемента нет");
-                    }
+                    stack.Top();
+                    //try
+                    //{
+                    //    stack.Top();
+                    //}
+                    //catch
+                    //{
+                    //    //Console.WriteLine($"Ошибка: элемента нет");
+                    //}
                 }
                 else if (item[0] == '4')
                 {
-                    try
-                    {
-                        stack.IsEmpty();
-                    }
-                    catch
-                    {
-                        //Console.WriteLine($"Элементов нет!");
-                    }
+                    stack.IsEmpty();
+                    //try
+                    //{
+                    //    stack.IsEmpty();
+                    //}
+                    //catch
+                    //{
+                    //    //Console.WriteLine($"Элементов нет!");
+                    //}
                 }
                 else if (item[0] == '5')
                 {

@@ -15,9 +15,13 @@ namespace AlgorithmsLaba3.Tasks.Task2
         {
             this.data = data;
         }
-        public void SetQueue(Queue<string> queue)
+        public void SetInitialData(string[] data)
         {
-            this.queue = queue;
+            queue = new Queue<string>();
+            for (int i = 0; i < data.Length; i++)
+            {
+                queue.Enqueue(data[i]);
+            }
         }
         public void Formation()
         {
@@ -34,37 +38,40 @@ namespace AlgorithmsLaba3.Tasks.Task2
                 }
                 else if (item[0] == '2')
                 {
-                    try
-                    {
-                        queue.Dequeue();
-                    }
-                    catch (Exception ex)
-                    {
-                        //Console.WriteLine($"Ошибка: {ex.Message}");
-                    }
+                    queue.Dequeue();
+                    //try
+                    //{
+                        
+                    //}
+                    //catch (Exception ex)
+                    //{
+                    //    //Console.WriteLine($"Ошибка: {ex.Message}");
+                    //}
                 }
                 else if (item[0] == '3')
                 {
-                    try
-                    {
-                        queue.Peek();
-                    }
-                    catch (Exception ex)
-                    {
-                        //Console.WriteLine($"Ошибка: {ex.Message}");
-                    }
+                    queue.Peek();
+                    //try
+                    //{
+                    //    queue.Peek();
+                    //}
+                    //catch (Exception ex)
+                    //{
+                    //    //Console.WriteLine($"Ошибка: {ex.Message}");
+                    //}
                 }
                 else if (item[0] == '4')
                 {
-                    try
-                    {
-                        string temp;
-                        queue.TryPeek(out temp);
-                    }
-                    catch (Exception ex)
-                    {
-                        //Console.WriteLine($"Элементов нет!");
-                    }
+                    string temp;
+                    queue.TryPeek(out temp);
+                    //try
+                    //{
+                        
+                    //}
+                    //catch (Exception ex)
+                    //{
+                    //    //Console.WriteLine($"Элементов нет!");
+                    //}
                 }
                 else if (item[0] == '5')
                 {

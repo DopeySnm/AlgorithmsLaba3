@@ -42,12 +42,12 @@ namespace AlgorithmsLaba3
                         menuListTask.Run();
                         break;
                     case 3:
-                        TestStackOp testStackOp = new TestStackOp();
-                        testStackOp.TestMenu();
+                        TestStackMenu testStackOp = new TestStackMenu();
+                        testStackOp.MainMenu();
                         break;
                     case 4:
-                        TestQueueOp testQueueOp = new TestQueueOp();
-                        testQueueOp.TestMenu();
+                        TestQueueMenu testQueueOp = new TestQueueMenu();
+                        testQueueOp.MainMenu();
                         break;
                 }
             } while (true);

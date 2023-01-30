@@ -16,9 +16,13 @@ namespace AlgorithmsLaba3.Tasks.Task2
         {
             this.data = data;
         }
-        public void SetQueue(OurQueue<string> stack)
+        public void SetInitialData(string[] data)
         {
-            this.queue = stack;
+            queue = new OurQueue<string>();
+            for (int i = 0; i < data.Length; i++)
+            {
+                queue.AddQueue(data[i]);
+            }
         }
         public void Formation()
         {
@@ -35,36 +39,39 @@ namespace AlgorithmsLaba3.Tasks.Task2
                 }
                 else if (item[0] == '2')
                 {
-                    try
-                    {
-                        queue.DeleteQueue();
-                    }
-                    catch
-                    {
-                        //Console.WriteLine($"Ошибка: элемента нет");
-                    }
+                    queue.DeleteQueue();
+                    //try
+                    //{
+                    //    queue.DeleteQueue();
+                    //}
+                    //catch
+                    //{
+                    //    //Console.WriteLine($"Ошибка: элемента нет");
+                    //}
                 }
                 else if (item[0] == '3')
                 {
-                    try
-                    {
-                        queue.ElementsQueue();
-                    }
-                    catch
-                    {
-                        //Console.WriteLine($"Ошибка: элемента нет");
-                    }
+                    queue.ElementsQueue();
+                    //try
+                    //{
+                    //    queue.ElementsQueue();
+                    //}
+                    //catch
+                    //{
+                    //    //Console.WriteLine($"Ошибка: элемента нет");
+                    //}
                 }
                 else if (item[0] == '4')
                 {
-                    try
-                    {
-                        var temp = queue.IsEmpty;
-                    }
-                    catch
-                    {
-                        //Console.WriteLine($"Элементов нет!");
-                    }
+                    var temp = queue.IsEmpty;
+                    //try
+                    //{
+                    //    var temp = queue.IsEmpty;
+                    //}
+                    //catch
+                    //{
+                    //    //Console.WriteLine($"Элементов нет!");
+                    //}
                 }
                 else if (item[0] == '5')
                 {

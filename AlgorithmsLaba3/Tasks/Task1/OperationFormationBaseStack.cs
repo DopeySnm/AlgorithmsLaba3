@@ -16,9 +16,13 @@ namespace AlgorithmsLaba3.Tasks.Task1
         {
             this.data = data;
         }
-        public void SetStack(Stack<string> stack)
+        public void SetInitialData(string[] data)
         {
-            this.stack = stack;
+            stack = new Stack<string>();
+            for (int i = 0; i < data.Length; i++)
+            {
+                stack.Push(data[i]);
+            }
         }
         public void Formation()
         {
@@ -35,37 +39,41 @@ namespace AlgorithmsLaba3.Tasks.Task1
                 }
                 else if (item[0] == '2')
                 {
-                    try
-                    {
-                        stack.Pop();
-                    }
-                    catch (Exception ex)
-                    {
-                        //Console.WriteLine($"Ошибка: {ex.Message}");
-                    }
+                    stack.Pop();
+                    //try
+                    //{
+                    //    stack.Pop();
+                    //}
+                    //catch (Exception ex)
+                    //{
+                    //    Console.WriteLine($"Ошибка: {ex.Message}");
+                    //}
                 }
                 else if (item[0] == '3')
                 {
-                    try
-                    {
-                        stack.Peek();
-                    }
-                    catch (Exception ex)
-                    {
-                        //Console.WriteLine($"Ошибка: {ex.Message}");
-                    }
+                    stack.Peek();
+                    //try
+                    //{
+                    //    stack.Peek();
+                    //}
+                    //catch (Exception ex)
+                    //{
+                    //    //Console.WriteLine($"Ошибка: {ex.Message}");
+                    //}
                 }
                 else if (item[0] == '4')
                 {
-                    try
-                    {
-                        string temp;
-                        stack.TryPeek(out temp);
-                    }
-                    catch (Exception ex)
-                    {
-                        //Console.WriteLine($"Элементов нет!");
-                    }
+                    string temp;
+                    stack.TryPeek(out temp);
+                    //try
+                    //{
+                    //    string temp;
+                    //    stack.TryPeek(out temp);
+                    //}
+                    //catch (Exception ex)
+                    //{
+                    //    //Console.WriteLine($"Элементов нет!");
+                    //}
                 }
                 else if (item[0] == '5')
                 {

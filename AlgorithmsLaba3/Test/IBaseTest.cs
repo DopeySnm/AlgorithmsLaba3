@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace AlgorithmsLaba3.Test
 {
-    internal interface IBaseTest
+    internal interface IBaseTest<T>
     {
-        public double Run(ITest testTime);
+        public T Run(ITest testTime);
     }
 }
